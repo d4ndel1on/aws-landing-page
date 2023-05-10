@@ -1,6 +1,6 @@
 = AWS landing page
 
-Example site to showcase in a lightning talk
+Example site to showcase in a lightning talk -> https://d1k1z025ut5824.cloudfront.net
 
 == Modules
 
@@ -22,9 +22,11 @@ Example site to showcase in a lightning talk
 
 * *deploy infrastructure*
 ** `make deploy_infrastructure`
-* *get api url from outputs*
-** e.g. `lightning-talk-infrastructure.ApiUrl = https://xxx.execute-api.eu-central-1.amazonaws.com`
+* *get api url from outputs file*
+** `./cdk-outputs.json` -> `ApiURL`
 * *use api url in frontend constants*
 ** `frontend/src/constants.ts`
 * *deploy react app*
 ** `make deploy_frontend`
+* *access webpage through url from outputs file*
+** `./cdk-outputs.json` -> `CloudFrontURL`

@@ -3,7 +3,9 @@ profile:=lightning-talk
 deploy_infrastructure:
 	@cd infrastructure && npx cdk deploy \
     		lightning-talk-infrastructure \
-    		--profile ${profile} --require-approval never
+    		--profile ${profile} \
+    		--require-approval never \
+    		--outputs-file ../cdk-outputs.json
 
 deploy_frontend:
 	@cd frontend && npm run build
