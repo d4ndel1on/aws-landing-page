@@ -1,0 +1,30 @@
+= AWS landing page
+
+Example site to showcase in a lightning talk
+
+== Modules
+
+* *infrastructure*
+** contains the AWS infrastructure
+** consists of a CDK app created with `cdk init app --language=typescript`
+** components:
+*** Lambda proxy handler served via API gateway
+*** DynamoDB table containing subscriptions and viewer count
+*** CloudFront served S3 bucket to deploy the React app to
+* *frontend*
+** contains the React frontend
+** consists of a React app created with `create-react-app . --template typescript`
+** Webpage components:
+*** Newsletter subscription feature (calling API)
+*** Viewer count feature (calling API)
+
+== Usage
+
+* *deploy infrastructure*
+** `make deploy_infrastructure`
+* *get api url from outputs*
+** e.g. `lightning-talk-infrastructure.ApiUrl = https://xxx.execute-api.eu-central-1.amazonaws.com`
+* *use api url in frontend constants*
+** `frontend/src/constants.ts`
+* *deploy react app*
+** `make deploy_frontend`
