@@ -20,6 +20,14 @@ Example site to showcase in a lightning talk -> https://d1k1z025ut5824.cloudfron
 
 == Usage
 
+[orange]*first time execution hint*
+
+* *replace aws profile name in line 1 of `Makefile`*
+* *bootstrap cdk in aws account*
+** `npx cdk bootstrap --profile <your-profile-name>`
+
+'''
+
 * *deploy infrastructure*
 ** `make deploy_infrastructure`
 * *get api url from outputs file*
