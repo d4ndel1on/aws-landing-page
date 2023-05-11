@@ -20,7 +20,7 @@ export const NewsletterSubscription = () => {
   return (
     <List>
       <ListItem>
-        <h3>Du willst benachrichtigt werden wenn die Seite fertig ist?</h3>
+        <h3>Interessiert an Updates?</h3>
       </ListItem>
 
       <ListItem>
@@ -33,7 +33,7 @@ export const NewsletterSubscription = () => {
       </ListItem>
 
       <ListItem>
-        <Button variant='contained' onClick={onSubscribe}>Benachrichtige mich</Button>
+        <Button variant="contained" onClick={onSubscribe}>Benachrichtige mich</Button>
       </ListItem>
       {message && (
         <ListItem>

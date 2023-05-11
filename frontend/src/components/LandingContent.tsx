@@ -5,7 +5,8 @@ import {ViewCounter} from "./ViewCounter";
 
 export const LandingContent = () => (
   <Container>
-    <h1>Willkommen auf der Lightning Talk Demoseite</h1>
+    <h1>Willkommen bei Firma1</h1>
+    <h2>Diese Seite befindet sich noch im Aufbau</h2>
 
     <NewsletterSubscription/>
 
