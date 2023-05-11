@@ -1,6 +1,6 @@
 import {CfnOutput, Duration, RemovalPolicy, Stack, StackProps} from 'aws-cdk-lib';
 import {Construct} from 'constructs';
-import {Distribution, ViewerProtocolPolicy} from "aws-cdk-lib/aws-cloudfront";
+import {CachedMethods, Distribution, PriceClass, ViewerProtocolPolicy} from "aws-cdk-lib/aws-cloudfront";
 import {BlockPublicAccess, Bucket} from "aws-cdk-lib/aws-s3";
 import {S3Origin} from "aws-cdk-lib/aws-cloudfront-origins";
 import {AttributeType, BillingMode, Table} from "aws-cdk-lib/aws-dynamodb";
@@ -31,10 +31,12 @@ export class InfrastructureStack extends Stack {
     });
 
     const distribution = new Distribution(this, 'CloudfrontDistribution', {
+      priceClass: PriceClass.PRICE_CLASS_100,
       comment: 'lightning talk distribution',
       defaultBehavior: {
         origin: new S3Origin(hostingBucket),
         viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        cachedMethods: CachedMethods.CACHE_GET_HEAD,
       },
       defaultRootObject: 'index.html',
       errorResponses: [
