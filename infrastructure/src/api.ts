@@ -7,26 +7,26 @@ import {sendWelcomeEmail} from "./emailClient";
 
 const handleSubscribeRequest = async (event: APIGatewayProxyEventV2): Promise<APIGatewayProxyResultV2> => {
   if (!event.body) {
-    return buildResponse(400, {error: 'body is missing'})
+    return buildResponse(400, {error: 'Body is missing'})
   }
   const email = JSON.parse(event.body).email
   if (!email || typeof email !== 'string') {
-    return buildResponse(400, {error: 'email is missing'})
+    return buildResponse(400, {error: 'Email is missing'})
   }
   if (!isValidEmail(email)) {
-    return buildResponse(400, {error: 'invalid email'})
+    return buildResponse(400, {error: 'Invalid email'})
   }
   const subscriptionSaved = await saveSubscription(email)
   if (subscriptionSaved) {
     const emailSent = await sendWelcomeEmail(email)
     if (emailSent) {
-      return buildResponse(200, {result: 'subscription saved'})
+      return buildResponse(200, {result: 'Subscription saved'})
     } else {
       await deleteSubscription(email)
-      return buildResponse(500, {error: 'failed to send email'})
+      return buildResponse(500, {error: 'Failed to send email'})
     }
   } else {
-    return buildResponse(409, {error: 'already subscribed'})
+    return buildResponse(409, {error: 'Already subscribed'})
   }
 }
 

@@ -1,5 +1,5 @@
 import {Button, List, ListItem, TextField, Typography} from "@mui/material";
-import {useState} from "react";
+import {FormEvent, useState} from "react";
 import {API_BASE_URL} from "../constants";
 
 export const NewsletterSubscription = () => {
@@ -7,7 +7,8 @@ export const NewsletterSubscription = () => {
   const [error, setError] = useState<string>('')
   const [message, setMessage] = useState<string>('')
 
-  const onSubscribe = async () => {
+  const onSubscribe = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
     const response = await fetch(API_BASE_URL + '/subscribe', {
       method: 'POST',
       body: JSON.stringify({email}),
@@ -18,33 +19,32 @@ export const NewsletterSubscription = () => {
   }
 
   return (
-    <List>
-      <ListItem>
-        <h3>Interessiert an Updates?</h3>
-      </ListItem>
-
-      <ListItem>
-        <TextField label="email"
-                   inputMode="email"
-                   error={!!error}
-                   style={{minWidth: 300}}
-                   onChange={(e) => setEmail(e.target.value)}
-        />
-      </ListItem>
-
-      <ListItem>
-        <Button variant="contained" onClick={onSubscribe}>Benachrichtige mich</Button>
-      </ListItem>
-      {message && (
+    <form onSubmit={onSubscribe}>
+      <List>
         <ListItem>
-          <Typography>{message}</Typography>
+          <h3>Interessiert an Updates?</h3>
         </ListItem>
-      )}
-      {error && (
+
         <ListItem>
-          <Typography style={{color: 'red'}}>{error}</Typography>
+
+          <TextField label="E-Mail"
+                     inputMode="email"
+                     error={!!error}
+                     style={{minWidth: 300}}
+                     helperText={error || ' '}
+                     onChange={(e) => setEmail(e.target.value)}
+          />
         </ListItem>
-      )}
-    </List>
+
+        <ListItem>
+          <Button type="submit" variant="contained">Benachrichtige mich</Button>
+        </ListItem>
+        {message && (
+          <ListItem>
+            <Typography>{message}</Typography>
+          </ListItem>
+        )}
+      </List>
+    </form>
   )
 }
