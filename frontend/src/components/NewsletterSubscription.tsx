@@ -26,6 +26,7 @@ export const NewsletterSubscription = () => {
       <ListItem>
         <TextField label="email"
                    inputMode="email"
+                   error={!!error}
                    style={{minWidth: 300}}
                    onChange={(e) => setEmail(e.target.value)}
         />
